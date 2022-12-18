@@ -1,0 +1,12 @@
+.form-container h2 {
+    color: #0b96e7;
+}
+.btn-submit {
+    background-color: #0890df;
+}
+
+@media screen and (min-width: 992px) {
+    .form-container {
+        width: 50%;
+    }
+}
