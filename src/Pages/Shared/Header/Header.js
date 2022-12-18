@@ -20,7 +20,7 @@ const Header = () => {
     }
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+        <Navbar collapseOnSelect expand="lg" bg="white" variant="light">
             <Container className='py-1'>
                 <Link to="/" className="navbar-brand">
                     <div className='d-flex align-items-center brand'>
@@ -33,7 +33,7 @@ const Header = () => {
                     <Nav className="me-auto">
                         <NavLink className="links" to="/">Home</NavLink>
                         <NavLink className="links" to="/blogs">Blogs</NavLink>
-                        <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+                        {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
                                 Another action
@@ -43,7 +43,7 @@ const Header = () => {
                             <NavDropdown.Item href="#action/3.4">
                                 Separated link
                             </NavDropdown.Item>
-                        </NavDropdown>
+                        </NavDropdown> */}
                     </Nav>
                     <Nav className='align-items-center'>
                         {
