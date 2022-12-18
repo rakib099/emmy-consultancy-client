@@ -1,0 +1,13 @@
+.brand p {
+    line-height: 1.2;
+    color: #0b96e7;     /* #fdb700 */
+}
+
+a {
+    color: black !important;
+    /* font-weight: 500 !important; */
+}
+
+.active {
+    color: #0b96e7 !important;
+}
