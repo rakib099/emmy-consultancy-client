@@ -3,11 +3,20 @@
     color: #0b96e7;     /* #fdb700 */
 }
 
-a {
-    color: black !important;
-    /* font-weight: 500 !important; */
+.links {
+    text-decoration: none;
+    color: black;
+    padding:  0.5rem;
+    font-weight: 600;
+    font-size: large;
 }
 
 .active {
-    color: #0b96e7 !important;
+    color: #fdb700;
+    /* border: 2px solid #0b96e7; */
+    border-radius: 8px;
+}
+
+.links:hover {
+    color: black;
 }

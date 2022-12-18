@@ -10,7 +10,7 @@ import { Link, NavLink } from 'react-router-dom';
 const Header = () => {
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-            <Container>
+            <Container className='py-1'>
                 <Link to="/" className="navbar-brand">
                     <div className='d-flex align-items-center brand'>
                         <img src={logo} alt="website-logo" />
@@ -20,8 +20,8 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <NavLink className="nav-link fw-semibold" to="/">Home</NavLink>
-                        <NavLink className="nav-link fw-semibold" to="/blogs">Blogs</NavLink>
+                        <NavLink className="links" to="/">Home</NavLink>
+                        <NavLink className="links" to="/blogs">Blogs</NavLink>
                         <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
@@ -35,8 +35,8 @@ const Header = () => {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <NavLink className="nav-link fw-semibold" to="/login">Login</NavLink>
-                        <NavLink className="nav-link fw-semibold" to="/signup">Sign up</NavLink>
+                        <NavLink className="links" to="/login">Login</NavLink>
+                        <NavLink className="links" to="/signup">Sign up</NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
