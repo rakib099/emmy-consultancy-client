@@ -66,7 +66,7 @@ const SignUp = () => {
 
     return (
         <Container>
-            <div className='my-4 form-container mx-auto'>
+            <div className='mt-4 mb-5 form-container mx-auto'>
                 <h2 className='my-3'>Create An Account</h2>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicFirstName">

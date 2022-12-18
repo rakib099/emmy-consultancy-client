@@ -1,0 +1,20 @@
+.service-stat {
+    background-color: teal;
+    padding: 3rem;
+    border-radius: 8px;
+    background-image: linear-gradient(to bottom, rgba(21, 21, 21, 0.9) 0%, rgba(21, 21, 21, 0.55) 100%), url('../../../assets/images/paris.jpg');
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-blend-mode: darken; */
+}
+.service-stat > h2 {
+    font-size: 2.5rem;
+}
+.service-stat hr {
+   border-width: 4px;
+   border-color: #ffffff;
+}
+.stats h2 {
+    font-size: 3.4rem;
+}

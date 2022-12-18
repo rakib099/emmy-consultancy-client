@@ -1,4 +1,5 @@
 import React from 'react';
+import './Footer.css';
 import logo from '../../../assets/images/logo-small.png';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaGithub, FaGoogle, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
@@ -47,7 +48,7 @@ const Footer = () => {
                         {/* <!-- Grid column --> */}
                         <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                             {/* <!-- Content --> */}
-                            <div className='d-flex align-items-center gap-2 mb-4'>
+                            <div className='d-flex align-items-center gap-2 mb-4 footer-brand'>
                                 <img src={logo} alt="logo" />
                                 <h6 className="text-uppercase fw-bold m-0">Emmy's Consultancy
                                 </h6>
@@ -120,7 +121,7 @@ const Footer = () => {
 
             {/* <!-- Copyright --> */}
             <div className="text-center p-4" style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}>
-                © 2022 Copyright:
+                © 2022 Copyright:{" "}
                 <Link className="text-reset fw-bold" to="/">Emmy's Consultancy</Link>
             </div>
             {/* <!-- Copyright --> */}

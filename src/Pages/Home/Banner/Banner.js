@@ -4,7 +4,7 @@ import banner from '../../../assets/images/banner.jpg';
 
 const Banner = () => {
     return (
-        <div id="travel-carousel" className="carousel slide mt-2" data-bs-ride="false">
+        <div id="travel-carousel" className="carousel slide mt-3" data-bs-ride="false">
 
             <div className="carousel-inner">
                 <div className="carousel-item active position-relative">

@@ -20,7 +20,7 @@ const Header = () => {
     }
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="white" variant="light">
+        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
             <Container className='py-1'>
                 <Link to="/" className="navbar-brand">
                     <div className='d-flex align-items-center brand'>
@@ -29,7 +29,7 @@ const Header = () => {
                     </div>
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Collapse id="responsive-navbar-nav" className='align-items-center'>
                     <Nav className="me-auto">
                         <NavLink className="links" to="/">Home</NavLink>
                         <NavLink className="links" to="/blogs">Blogs</NavLink>
