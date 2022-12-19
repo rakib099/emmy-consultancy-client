@@ -1,0 +1,11 @@
+.btn-details {
+    background-color: teal;
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+.btn-details:hover {
+    background-color: #495abb;
+}
