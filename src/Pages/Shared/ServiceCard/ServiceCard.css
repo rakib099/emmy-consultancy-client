@@ -9,3 +9,13 @@
 .btn-details:hover {
     background-color: #495abb;
 }
+
+@media screen and (max-width: 767px) {
+    .card-container {
+        display: flex;
+        justify-content: center;
+    }
+    .card {
+        width: 60%;
+    }
+}
