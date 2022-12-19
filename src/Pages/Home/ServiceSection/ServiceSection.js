@@ -16,7 +16,8 @@ const ServiceSection = () => {
     }, []);
 
     return (
-        <div className='sec-service mt-4'>
+        <div className='sec-services mt-4'>
+            <h2 className='mb-3 title text-center'>Our Services</h2>
             <Row xs={1} md={2} lg={3} className="g-4">
                 {
                     services.map(service => <ServiceCard

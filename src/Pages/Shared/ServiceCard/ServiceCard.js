@@ -2,10 +2,13 @@ import React from 'react';
 import './ServiceCard.css';
 import { Card, Col } from 'react-bootstrap';
 import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im';
+import { useNavigate } from 'react-router-dom';
 
 const ServiceCard = ({ service }) => {
-    const { title, img, charge, description, rating } = service;
+    const navigate = useNavigate();
+    const { _id, title, img, charge, description, rating } = service;
 
+    // setting the ratings
     let stars;
     if (rating === 5) {
         stars = <p className='text-warning m-0 d-flex gap-1'>
@@ -60,7 +63,9 @@ const ServiceCard = ({ service }) => {
                             }
                         </Card.Text>
                         <div className='btn-container text-center'>
-                            <button className='btn-details'>View Details</button>
+                            <button 
+                            onClick={() => navigate(`/services/${_id}`)}
+                            className='btn-details'>View Details</button>
                         </div>
                     </Card.Body>
                 </Card>
