@@ -7,11 +7,13 @@ import { toast } from 'react-hot-toast';
 import ReviewCard from '../ReviewCard/ReviewCard';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import useTitle from '../../../hooks/useTitle';
 
 const ServiceDetails = () => {
     const { user } = useContext(AuthContext);
     const serviceDetails = useLoaderData();
     const [reviews, setReviews] = useState([]);
+    useTitle("Service Details");
 
     const { _id, img, title, shortTitle, para1, para2, para3, para4, para5, para6, advantages, requirements, rating, charge } = serviceDetails;
 

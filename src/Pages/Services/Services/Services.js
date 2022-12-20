@@ -3,9 +3,11 @@ import './Services.css'
 import { Container, Row } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
 import ServiceCard from '../../Shared/ServiceCard/ServiceCard';
+import useTitle from '../../../hooks/useTitle';
 
 const Services = () => {
     const services = useLoaderData();
+    useTitle("Services");
 
     return (
         <Container>

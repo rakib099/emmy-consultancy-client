@@ -7,11 +7,13 @@ import { toast } from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../../hooks/useTitle';
 
 const SignUp = () => {
     const { createUser, updateUserProfile, providerLogin } = useContext(AuthContext);
     const [accepted, setAccepted] = useState(false);
     const [error, setError] = useState("");
+    useTitle("Sign Up");
 
     const navigate = useNavigate();
     const location = useLocation();
