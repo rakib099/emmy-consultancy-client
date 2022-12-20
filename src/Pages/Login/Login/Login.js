@@ -1,15 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import './Login.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
-    const {signIn, providerLogin} = useContext(AuthContext);
+    const { signIn, providerLogin } = useContext(AuthContext);
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    let from = location.state?.from?.pathname || "/";
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -21,12 +26,17 @@ const Login = () => {
         const password = form.password.value;
 
         signIn(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            form.reset();
-        })
-        .catch(err => console.error(err));
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                setError("");
+                navigate(from, { replace: true });
+            })
+            .catch(err => {
+                console.error(err);
+                setError(err.message);
+            });
     }
 
     // Provider login system
@@ -35,6 +45,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error);
@@ -55,6 +66,9 @@ const Login = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" name="password" placeholder="Password" required />
                     </Form.Group>
+                    <p className="text-danger">
+                        {error}
+                    </p>
                     <Button className='btn-submit' variant="primary" type="submit">
                         Login
                     </Button>
@@ -62,6 +76,7 @@ const Login = () => {
                 <p className='mt-2'>
                     <small>New to this website? <Link to="/signup">Create an account!</Link></small>
                 </p>
+                {/* Provider Login */}
                 <div className='d-flex align-items-center mt-3'>
                     <hr className='w-25' />
                     <p className='flex-grow-1 text-secondary text-center m-0'><small>Or use one of these methods below</small></p>

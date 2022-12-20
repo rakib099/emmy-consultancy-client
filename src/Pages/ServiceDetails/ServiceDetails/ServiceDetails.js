@@ -1,46 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './ServiceDetails.css';
 import { Col, Container, Row } from 'react-bootstrap';
-import pic from '../../../assets/images/aus-big.png';
-import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { Link, useLoaderData } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import ReviewCard from '../ReviewCard/ReviewCard';
 
 const ServiceDetails = () => {
     const { user } = useContext(AuthContext);
     const serviceDetails = useLoaderData();
+    const [reviews, setReviews] = useState([]);
+
     const { _id, img, title, shortTitle, para1, para2, para3, para4, para5, para6, advantages, requirements, rating, charge } = serviceDetails;
 
-    // // setting the ratings
-    // let stars;
-    // if (rating === 5) {
-    //     stars = <p className='text-warning m-0 d-flex gap-1'>
-    //         <ImStarFull />
-    //         <ImStarFull />
-    //         <ImStarFull />
-    //         <ImStarFull />
-    //         <ImStarFull />
-    //     </p>
-    // }
-    // else if (rating === 4.5) {
-    //     stars = <p className='text-warning m-0 d-flex gap-1'>
-    //         <ImStarFull />
-    //         <ImStarFull />
-    //         <ImStarFull />
-    //         <ImStarFull />
-    //         <ImStarHalf />
-    //     </p>
-    // }
-    // else {
-    //     stars = <p className='text-warning m-0 d-flex gap-1'>
-    //         <ImStarFull />
-    //         <ImStarFull />
-    //         <ImStarFull />
-    //         <ImStarFull />
-    //         <ImStarEmpty />
-    //     </p>
-    // }
+    // Loading reviews service id wise
+    useEffect(() => {
+        fetch(`http://localhost:5000/reviews?serviceId=${_id}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setReviews(data);
+            })
+            .catch(err => console.error(err));
+    }, [_id]);
+
 
     const handleAddReview = (e) => {
         e.preventDefault();
@@ -68,21 +51,21 @@ const ServiceDetails = () => {
             },
             body: JSON.stringify(review)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if (data.acknowledged) {
-                toast.success("Review added");
-            }
-        })
-        .catch(err => console.error(err));
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success("Review added");
+                }
+            })
+            .catch(err => console.error(err));
     }
 
     return (
         <div className="details-page mb-5">
             <img className='img-fluid' src={img} alt="country-img" />
-            <Container className='mt-4'>
-                <h2>{title}</h2>
+            <Container className='mt-4 mt-lg-5'>
+                <h1 className='mb-4'>{title}</h1>
                 <Row className='flex-column-reverse flex-lg-row mt-lg-3'>
                     <Col lg={8}>
                         <p>{para1}</p>
@@ -128,6 +111,22 @@ const ServiceDetails = () => {
                                     <textarea className='p-3' name='review' cols="120" rows="5" placeholder="Type here..."></textarea>
                                     <button type='submit' className='btn btn-primary d-block'>Add review</button>
                                 </form>
+                                <h3 className='mt-5 mb-3'>Reviews</h3>
+                                {
+                                    reviews < 1 ?
+                                        <div className='p-5'>
+                                            <h2 className='text-muted text-center '>No reviews added yet</h2>
+                                        </div>
+                                        :
+                                        <>
+                                            {
+                                                reviews.map(review => <ReviewCard
+                                                    key={review._id}
+                                                    review={review}
+                                                />)
+                                            }
+                                        </>
+                                }
                             </>
                             :
                             <h5>Please <Link to="/login">Login</Link> to add a review</h5>

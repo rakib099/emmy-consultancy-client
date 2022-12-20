@@ -5,56 +5,65 @@ import ReviewRow from '../ReviewRow/ReviewRow';
 import './MyReviews.css';
 
 const MyReviews = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-        .then(res => res.json())
-        .then(data => setReviews(data))
-        .catch(err => console.error(err));
+            .then(res => res.json())
+            .then(data => setReviews(data))
+            .catch(err => console.error(err));
     }, [user?.email]);
 
     return (
         <Container>
-            <div className='my-reviews mt-3 mb-5'>
-                <h2 className='page-title'>My Reviews {reviews.length}</h2>
-                <div className="overflow-x-auto w-full">
-                    <table className="table w-full">
-                        <thead>
-                            <tr>
-                                <th>
-                                </th>
-                                <th>Service</th>
-                                <th>Review</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                reviews.map(review => <ReviewRow 
-                                    key={review._id}
-                                    reviewDetails={review}
-                                    reviews={reviews}
-                                    setReviews={setReviews}
-                                />)
-                            }
-                        </tbody>
+            {
+                reviews < 1 ?
+                    <div className='no-review'>
+                        <h2 className='text-muted text-center fst-italic'>No reviews were added</h2>
+                    </div>
+                    :
+                    <>
+                        <div className='my-reviews mt-4 mb-5'>
+                            <h2 className='page-title'>My Reviews</h2>
+                            <div className="overflow-x-auto w-full">
+                                <table className="table w-full">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th>Service</th>
+                                            <th>Review</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            reviews.map(review => <ReviewRow
+                                                key={review._id}
+                                                reviewDetails={review}
+                                                reviews={reviews}
+                                                setReviews={setReviews}
+                                            />)
+                                        }
+                                    </tbody>
 
-                        <tfoot>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th>Total Reviews</th>
-                                <th>{reviews.length}</th>
-                                <th></th>
-                            </tr>
-                        </tfoot>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Total Reviews</th>
+                                            <th>{reviews.length}</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
 
-                    </table>
-                </div>
-            </div>
+                                </table>
+                            </div>
+                        </div>
+                    </>
+            }
         </Container>
     );
 };

@@ -5,12 +5,17 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { toast } from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
-    const {createUser, updateUserProfile, providerLogin} = useContext(AuthContext);
+    const { createUser, updateUserProfile, providerLogin } = useContext(AuthContext);
     const [accepted, setAccepted] = useState(false);
+    const [error, setError] = useState("");
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -24,14 +29,18 @@ const SignUp = () => {
         const password = form.password.value;
 
         createUser(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            handleUpdateUser(name, photoURL);
-            toast.success("Sign up successful! You may login now.");
-            form.reset();
-        })
-        .catch(err => console.error(err));
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                handleUpdateUser(name, photoURL);
+                setError("");
+                toast.success("Sign up successful! You have been logged in.");
+                form.reset();
+            })
+            .catch(err => {
+                console.error(err);
+                setError(err.message);
+            });
     }
 
     // update user's name and photo
@@ -42,10 +51,10 @@ const SignUp = () => {
         }
 
         updateUserProfile(profile)
-        .then(() => {
-            console.log('profile updated');
-        })
-        .catch(err => console.error(err));
+            .then(() => {
+                console.log('profile updated');
+            })
+            .catch(err => console.error(err));
     }
 
     // Provider login system
@@ -54,6 +63,7 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error);
@@ -89,9 +99,13 @@ const SignUp = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" name="password" placeholder="Password" required />
                     </Form.Group>
+                    <p className="text-danger">
+                        {error}
+                    </p>
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check onClick={handleChecked} type="checkbox" label="Accept our Terms and Conditions" />
                     </Form.Group>
+
                     <Button className='btn-submit' variant="primary" type="submit" disabled={!accepted}>
                         Sign up
                     </Button>
