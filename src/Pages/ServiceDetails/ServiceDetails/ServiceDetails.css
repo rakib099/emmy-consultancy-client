@@ -1,3 +1,7 @@
+.country-img {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
     textarea {
         width: 100%;

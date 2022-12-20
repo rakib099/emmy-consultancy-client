@@ -5,6 +5,8 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { Link, useLoaderData } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import ReviewCard from '../ReviewCard/ReviewCard';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceDetails = () => {
     const { user } = useContext(AuthContext);
@@ -22,7 +24,7 @@ const ServiceDetails = () => {
                 setReviews(data);
             })
             .catch(err => console.error(err));
-    }, [_id]);
+    }, [_id, reviews]);
 
 
     const handleAddReview = (e) => {
@@ -63,7 +65,12 @@ const ServiceDetails = () => {
 
     return (
         <div className="details-page mb-5">
-            <img className='img-fluid' src={img} alt="country-img" />
+            <PhotoProvider>
+                <PhotoView src={img}>
+                    <img className='img-fluid country-img' src={img} alt="country-img" />
+                </PhotoView>
+            </PhotoProvider>
+
             <Container className='mt-4 mt-lg-5'>
                 <h1 className='mb-4'>{title}</h1>
                 <Row className='flex-column-reverse flex-lg-row mt-lg-3'>

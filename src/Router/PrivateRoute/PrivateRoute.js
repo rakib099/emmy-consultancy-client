@@ -7,13 +7,12 @@ const PrivateRoute = ({ children }) => {
     const location = useLocation();
 
     const style = {
-        color: "#5c69b7",
         height: "300px"
     }
 
     if (!!loading) {
         return (
-            <div style={style} className="d-flex justify-content-center align-items-center">
+            <div style={style} className="d-flex justify-content-center align-items-center text-primary">
                 <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>

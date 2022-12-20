@@ -3,6 +3,8 @@ import './ServiceCard.css';
 import { Card, Col } from 'react-bootstrap';
 import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im';
 import { useNavigate } from 'react-router-dom';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceCard = ({ service }) => {
     const navigate = useNavigate();
@@ -42,7 +44,12 @@ const ServiceCard = ({ service }) => {
         <Col>
             <div className="card-container">
                 <Card className='shadow'>
-                    <Card.Img variant="top" src={img} />
+                    <PhotoProvider>
+                        <PhotoView src={img}>
+                            <Card.Img variant="top" src={img} className="country-img" />
+                        </PhotoView>
+                    </PhotoProvider>
+
                     <Card.Body>
                         <Card.Title>{title}</Card.Title>
                         <hr />
@@ -63,9 +70,9 @@ const ServiceCard = ({ service }) => {
                             }
                         </Card.Text>
                         <div className='btn-container text-center'>
-                            <button 
-                            onClick={() => navigate(`/services/${_id}`)}
-                            className='btn-details'>View Details</button>
+                            <button
+                                onClick={() => navigate(`/services/${_id}`)}
+                                className='btn-details'>View Details</button>
                         </div>
                     </Card.Body>
                 </Card>

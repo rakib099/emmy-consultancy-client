@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import ReviewRow from '../ReviewRow/ReviewRow';
 import './MyReviews.css';
@@ -7,13 +7,23 @@ import './MyReviews.css';
 const MyReviews = () => {
     const { user } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch(`http://localhost:5000/reviews?email=${user?.email}`)
             .then(res => res.json())
-            .then(data => setReviews(data))
+            .then(data => {
+                setReviews(data);
+                setLoading(false);
+            })
             .catch(err => console.error(err));
     }, [user?.email]);
+
+    if (loading) {
+        return <div className="text-center p-4">
+            <Spinner animation="border" variant="primary" />
+        </div>
+    }
 
     return (
         <Container>
