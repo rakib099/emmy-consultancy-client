@@ -12,7 +12,7 @@ const ConfirmModal = ({ show, setShow, _id, serviceTitle, reviews, setReviews })
 
     const handleConfirmDelete = () => {
 
-        fetch(`http://localhost:5000/reviews/${_id}`, {
+        fetch(`https://emmy-consultancy-server.vercel.app/reviews/${_id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

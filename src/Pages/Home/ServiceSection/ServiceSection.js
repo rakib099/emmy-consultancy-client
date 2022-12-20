@@ -9,7 +9,7 @@ const ServiceSection = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/services?page=home')
+        fetch('https://emmy-consultancy-server.vercel.app/services?page=home')
             .then(res => res.json())
             .then(data => setServices(data))
             .catch(err => console.error(err));

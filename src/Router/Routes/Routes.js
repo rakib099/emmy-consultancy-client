@@ -28,13 +28,13 @@ const routes = createBrowserRouter([
             {
                 path: '/services',
                 element: <Services />,
-                loader: () => fetch('http://localhost:5000/services')
+                loader: () => fetch('https://emmy-consultancy-server.vercel.app/services')
             },
             {
                 path: '/services/:id',
                 element: <ServiceDetails />,
                 loader: ({params}) => {
-                    return fetch(`http://localhost:5000/serviceDetails/${params.id}`);
+                    return fetch(`https://emmy-consultancy-server.vercel.app/serviceDetails/${params.id}`);
                 }
             },
             {

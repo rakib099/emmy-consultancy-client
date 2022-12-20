@@ -19,7 +19,7 @@ const ServiceDetails = () => {
 
     // Loading reviews service id wise
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?serviceId=${_id}`)
+        fetch(`https://emmy-consultancy-server.vercel.app/reviews?serviceId=${_id}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data);
@@ -48,7 +48,7 @@ const ServiceDetails = () => {
             review: reviewText
         }
 
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://emmy-consultancy-server.vercel.app/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
