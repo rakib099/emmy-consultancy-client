@@ -5,11 +5,12 @@ import pic from '../../../assets/images/aus-big.png';
 import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { Link, useLoaderData } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const ServiceDetails = () => {
     const { user } = useContext(AuthContext);
     const serviceDetails = useLoaderData();
-    const { img, title, para1, para2, para3, para4, para5, para6, advantages, requirements } = serviceDetails;
+    const { _id, img, title, shortTitle, para1, para2, para3, para4, para5, para6, advantages, requirements, rating, charge } = serviceDetails;
 
     // // setting the ratings
     // let stars;
@@ -40,6 +41,42 @@ const ServiceDetails = () => {
     //         <ImStarEmpty />
     //     </p>
     // }
+
+    const handleAddReview = (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const reviewText = form.review.value;
+        form.reset();
+
+        const review = {
+            serviceId: _id,
+            serviceTitle: shortTitle,
+            userEmail: user.email,
+            userName: user.displayName,
+            userPhoto: user.photoURL,
+            serviceImg: img,
+            rating: rating,
+            charge: charge,
+            review: reviewText
+        }
+
+        fetch('http://localhost:5000/reviews', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(review)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data.acknowledged) {
+                toast.success("Review added");
+            }
+        })
+        .catch(err => console.error(err));
+    }
 
     return (
         <div className="details-page mb-5">
@@ -87,8 +124,10 @@ const ServiceDetails = () => {
                         user?.uid ?
                             <>
                                 <h3>Add a review</h3>
-                                <textarea className='p-3' name='review' cols="120" rows="5" placeholder="Type here..."></textarea>
-                                <button className='btn btn-primary d-block'>Add review</button>
+                                <form onSubmit={handleAddReview}>
+                                    <textarea className='p-3' name='review' cols="120" rows="5" placeholder="Type here..."></textarea>
+                                    <button type='submit' className='btn btn-primary d-block'>Add review</button>
+                                </form>
                             </>
                             :
                             <h5>Please <Link to="/login">Login</Link> to add a review</h5>

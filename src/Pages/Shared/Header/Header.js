@@ -49,6 +49,8 @@ const Header = () => {
                         {
                             user?.uid ?
                                 <>
+                                    <NavLink className="links" to="/reviews">My Reviews</NavLink>
+                                    <NavLink className="links" to="/add-service">Add Service</NavLink>
                                     <Button onClick={handleLogOut} variant='light'>Log out</Button>
                                     <div className='image-container' title={user?.displayName || "Name Not Found"}>
                                         {

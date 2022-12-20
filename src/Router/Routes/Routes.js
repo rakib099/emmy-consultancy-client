@@ -3,6 +3,7 @@ import Main from "../../Layouts/Main";
 import Blogs from "../../Pages/Blogs/Blogs";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login/Login";
+import MyReviews from "../../Pages/MyReviews/MyReviews/MyReviews";
 import ServiceDetails from "../../Pages/ServiceDetails/ServiceDetails/ServiceDetails";
 import Services from "../../Pages/Services/Services/Services";
 import SignUp from "../../Pages/SignUp/SignUp/SignUp";
@@ -31,6 +32,10 @@ const routes = createBrowserRouter([
                 loader: ({params}) => {
                     return fetch(`http://localhost:5000/serviceDetails/${params.id}`);
                 }
+            },
+            {
+                path: '/reviews',
+                element: <MyReviews />
             },
             {
                 path: '/login',
