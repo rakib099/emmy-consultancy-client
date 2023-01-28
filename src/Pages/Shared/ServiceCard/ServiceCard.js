@@ -1,44 +1,14 @@
 import React from 'react';
 import './ServiceCard.css';
 import { Card, Col } from 'react-bootstrap';
-import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im';
 import { useNavigate } from 'react-router-dom';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import Rating from '../Rating/Rating';
 
 const ServiceCard = ({ service }) => {
     const navigate = useNavigate();
     const { _id, title, img, charge, description, rating } = service;
-
-    // setting the ratings
-    let stars;
-    if (rating === 5) {
-        stars = <p className='text-warning m-0 d-flex gap-1'>
-            <ImStarFull />
-            <ImStarFull />
-            <ImStarFull />
-            <ImStarFull />
-            <ImStarFull />
-        </p>
-    }
-    else if (rating === 4.5) {
-        stars = <p className='text-warning m-0 d-flex gap-1'>
-            <ImStarFull />
-            <ImStarFull />
-            <ImStarFull />
-            <ImStarFull />
-            <ImStarHalf />
-        </p>
-    }
-    else {
-        stars = <p className='text-warning m-0 d-flex gap-1'>
-            <ImStarFull />
-            <ImStarFull />
-            <ImStarFull />
-            <ImStarFull />
-            <ImStarEmpty />
-        </p>
-    }
 
     return (
         <Col>
@@ -55,8 +25,7 @@ const ServiceCard = ({ service }) => {
                         <hr />
                         <div className='d-flex justify-content-between mb-2'>
                             <div className='d-flex align-items-center text-secondary gap-2'>
-                                {stars}
-                                <span>{rating}</span>
+                                <Rating rating={rating} />
                             </div>
                             <Card.Text className='fw-semibold'>${charge} / hour</Card.Text>
                         </div>

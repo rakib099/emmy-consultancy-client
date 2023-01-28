@@ -50,7 +50,7 @@ const AddService = () => {
                 <Form onSubmit={handleAddService}>
                     <Form.Group className="mb-3" controlId="formBasicTitle">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" name='title' placeholder="Title of the service" />
+                        <Form.Control type="text" name='title' placeholder="Title of the service" required />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPhotoURL">
@@ -59,11 +59,11 @@ const AddService = () => {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicRating">
                         <Form.Label>Rating</Form.Label>
-                        <Form.Control type="text" name='rating' placeholder="Rating of the service" />
+                        <Form.Control type="text" name='rating'  placeholder="Rating of the service" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicCharge">
                         <Form.Label>Charge</Form.Label>
-                        <Form.Control type="text" name='charge' placeholder="Service Charge" />
+                        <Form.Control type="number" name='charge' min="20" placeholder="Service Charge" required />
                     </Form.Group>
                     <FloatingLabel className='mb-3 text-muted' controlId="floatingTextarea2" label="Description">
                         <Form.Control
@@ -71,6 +71,7 @@ const AddService = () => {
                             placeholder="Type here..."
                             name="description"
                             style={{ height: '100px' }}
+                            required
                         />
                     </FloatingLabel>
                     <Button variant="primary" type="submit">
